@@ -1,4 +1,4 @@
-package Model;
+package com.ride.Model;
 
 /**
  * Created by jmmodi on 11/10/2015.

@@ -1,4 +1,4 @@
-package Model;
+package com.ride.Model;
 
 /**
  * Created by jmmodi on 11/10/2015.
@@ -12,13 +12,6 @@ public class User {
     public String phoneNumber;
     public String address;
 
-    public User(String firstName, String lastName, String emailAddress, String phoneNumber, String address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-    }
 
     public String getAddress() {
         return address;

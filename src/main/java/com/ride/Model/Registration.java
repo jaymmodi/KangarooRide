@@ -1,4 +1,4 @@
-package Model;
+package com.ride.Model;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ public class Registration {
     Date ride_dateTime;
     String comments;
 
-    
+
     public String getComments() {
         return comments;
     }
