@@ -7,22 +7,51 @@ import java.util.Date;
  */
 public class Registration {
 
-    int id;
-    boolean active;
+    int registration_id;
+    int user_id;
+    int ride_id;
+    Date ride_dateTime;
+    String comments;
 
-    public int getId() {
-        return id;
+    
+    public String getComments() {
+        return comments;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
-    public boolean isActive() {
-        return active;
+
+    public int getRegistration_id() {
+        return registration_id;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setRegistration_id(int registration_id) {
+        this.registration_id = registration_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getRide_id() {
+        return ride_id;
+    }
+
+    public void setRide_id(int ride_id) {
+        this.ride_id = ride_id;
+    }
+
+    public Date getRide_dateTime() {
+        return ride_dateTime;
+    }
+
+    public void setRide_dateTime(Date ride_dateTime) {
+        this.ride_dateTime = ride_dateTime;
     }
 }

@@ -9,14 +9,27 @@ public class User {
     public String firstName;
     public String lastName;
     public String emailAddress;
-    public Long phoneNumber;
+    public String phoneNumber;
+    public String address;
+
+    public User(String firstName, String lastName, String emailAddress, String phoneNumber, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -43,11 +56,11 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
