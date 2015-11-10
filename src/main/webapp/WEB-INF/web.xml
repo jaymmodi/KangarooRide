@@ -6,11 +6,19 @@
            version="3.0">
 
     <servlet>
-        <servlet-name>main-servlet</servlet-name>
+        <servlet-name>main</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>config.ApplicationConfig</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>main-servlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
