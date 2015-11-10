@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAsync
-@ComponentScan(basePackages = {"controllers"})
+@ComponentScan(basePackages = {"com.ride"})
 public class ApplicationConfig {
 
 

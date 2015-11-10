@@ -14,7 +14,7 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>config.ApplicationConfig</param-value>
+            <param-value>com.ride.config.ApplicationConfig</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

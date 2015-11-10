@@ -1,7 +1,7 @@
 package com.ride.controllers;
 
-import Model.User;
-import DAO.UserDAO;
+import com.ride.Model.User;
+import com.ride.DAO.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +25,7 @@ public class HelloWorldController {
         u.setLastName("Modi");
         u.setEmailAddress("modi.jay6@gmail.com");
         u.setPhoneNumber("8123696652");
+        u.setAddress("");
 
         userDAO.create(u);
 
