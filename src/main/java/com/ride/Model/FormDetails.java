@@ -14,7 +14,16 @@ public class FormDetails {
     public String address;
     public String rideName;
     public Date ride_dateTime;
+    public String time;
     public String comments;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getFirstName() {
         return firstName;
