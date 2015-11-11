@@ -6,9 +6,9 @@ import com.ride.Model.Rides;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 /**
  * Created by jmmodi on 11/9/2015.
@@ -25,6 +25,16 @@ public class FormController {
         model.addAttribute("formDetails", new FormDetails());
         model.addAttribute("rides", getAllRides());
         return "form";
+    }
+
+    @RequestMapping(value = "/getSlots", method = RequestMethod.GET)
+    @ResponseBody
+    private ArrayList<String> getTimeSlots(@RequestParam("date") String date) {
+        ArrayList<String> s = new ArrayList<>();
+        s.add("8.00 AM- 8.30 AM");
+        s.add("8.30 AM- 9:00 AM");
+
+        return s;
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
