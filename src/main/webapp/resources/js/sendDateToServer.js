@@ -11,7 +11,7 @@ function sendDate() {
             $.each(data, function(key, value) {
                 $('#timeSlots')
                     .append($("<option></option>")
-                        .attr("value",key)
+                        .attr("value",value)
                         .text(value));
             });
         }
