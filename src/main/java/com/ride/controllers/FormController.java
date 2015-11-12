@@ -3,6 +3,7 @@ package com.ride.controllers;
 import com.ride.DAO.UserDAO;
 import com.ride.Model.FormDetails;
 import com.ride.Model.Rides;
+import com.ride.services.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class FormController {
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    ValidationService validationService;
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public String goToHelloPage(Model model) {
@@ -39,7 +43,17 @@ public class FormController {
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String postForm(@ModelAttribute FormDetails formDetails, Model model) {
-        model.addAttribute("user", formDetails);
+        model.addAttribute("formDetails", formDetails);
+
+        if(validationService.isValid(formDetails)){
+            //save to db
+            //return a confirmation code
+            // also send an email to user
+        }
+        else{
+            // validation message
+            String message = validationService.getErrorMessage();
+        }
 
         return "result";
     }
