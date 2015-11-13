@@ -1,0 +1,11 @@
+.radio label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    padding-left: 0px;
+}
+
+/*.well {*/
+    /*background: rgb(22, 105, 173);*/
+/*}*/
