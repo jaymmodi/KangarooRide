@@ -2,65 +2,116 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" charset="UTF-8"/>
     <title>Book a Ride</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="../../resources/css/datepicker.css" th:href="@{/resources/css/datepicker.css}"/>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen"/>
+    <link rel="stylesheet" href="../../resources/css/form.css" th:href="@{/resources/css/form.css}"/>
 </head>
 <body>
-    <form th:action="@{/form}" th:object="${formDetails}" method="post">
-        <div class="firstname">
-            First Name* : <input th:type="text" th:field="*{firstName}"/>
-        </div>
-        <div class="lastname">
-            Last Name* : <input th:type="text" th:field="*{lastName}"/>
-        </div>
-        <div class="email">
-            Email* : <input th:type="text" th:field="*{emailAddress}"/>
-        </div>
-        <div class="phoneNumber">
-            Phone Number* : <input th:type="text" th:field="*{phoneNumber}"/>
-        </div>
-        <div class="address">
-            Address* : <input th:type="text" th:field="*{address}"/>
-        </div>
-        <div class="Ride_Name">
-           Select a Ride*
-            <ul>
-                <li th:each="ride : ${rides}">
-                    <input type="radio" th:field="*{rideName}" th:value="${ride}"/>
-                    <label th:text="${ride}">Select a Ride</label>
-                </li>
-            </ul>
-        </div>
-        <div class="date">
-           Pick a Date* : <input  type="text" placeholder="click to show datepicker" id="datepicker" onchange="sendDate()" th:field="*{date}"/>
-        </div>
-        <div class="time">
-            Pick a Time* : <select id="timeSlots" th:field="*{time}"></select>
-        </div>
-        <div class="comments">
-            Additional Comments : <input  type="text" placeholder="Please add in additional Comments" id="comments" th:field="*{comments}"/>
-        </div>
-        <div class="submit">
-            <input type="submit" value="submit"/>
-        </div>
-    </form>
+<div class="container">
+    <!--<div class="row">-->
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="../../resources/js/datepicker.js" th:src="@{/resources/js/datepicker.js}"></script>
-    <script src="../../resources/js/sendDateToServer.js" th:src="@{/resources/js/sendDateToServer.js}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#datepicker').datepicker({
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6 well">
+        <h4 class="text-center">Crazy Calvin's Kangaroo Rides</h4>
+
+        <form th:action="@{/form}" th:object="${formDetails}" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="FirstName" class="control-label col-xs-4">First Name*</label>
+
+                <div class="col-xs-8">
+                    <input th:type="text" th:field="*{firstName}" id="FirstName" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="LastName" class="control-label col-xs-4">Last Name*</label>
+
+                <div class="col-xs-8">
+                    <input th:type="text" th:field="*{lastName}" id="LastName" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="EmailAddress" class="control-label col-xs-4">Email Address*</label>
+
+                <div class="col-xs-8">
+                    <input th:type="text" th:field="*{emailAddress}" id="EmailAddress" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="PhoneNumber" class="control-label col-xs-4">Phone Number*</label>
+
+                <div class="col-xs-8">
+                    <input th:type="text" th:field="*{phoneNumber}" id="PhoneNumber" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="radio">
+                    <label for="rideName" class="control-label col-xs-4">Select a Ride*</label>
+
+                    <div class="col-xs-8">
+                        <ul>
+                            <li th:each="ride : ${rides}">
+                                <input id="rideName" type="radio" th:field="*{rideName}" th:value="${ride}"/>
+                                <label th:text="${ride}">Select a Ride</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="date form-group">
+                <label for="datepicker" class="control-label col-xs-4">Pick a Date*</label>
+
+                <div class="col-xs-8">
+                    <input type="text" placeholder="click to show datepicker" id="datepicker"
+                           onchange="sendDate()" th:field="*{date}" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="time form-group">
+                <label for="timeSlots" class="control-label col-xs-4">Pick a Time*</label>
+
+                <div class="col-xs-8">
+                    <select id="timeSlots" th:field="*{time}" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Comments" class="control-label col-xs-4">Comments</label>
+
+                <div class="col-xs-8">
+                    <input th:type="text" th:field="*{comments}" id="Comments" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" id="submit" class="btn btn-primary center-block" value="submit"/>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-xs-3"></div>
+    <!--</div>-->
+</div>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="../../resources/js/datepicker.js" th:src="@{/resources/js/datepicker.js}"></script>
+<script src="../../resources/js/sendDateToServer.js" th:src="@{/resources/js/sendDateToServer.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datepicker').datepicker({
             format: "dd/mm/yyyy"
-            });
+        });
     });
-    </script>
+</script>
 
 </body>
 </html>
