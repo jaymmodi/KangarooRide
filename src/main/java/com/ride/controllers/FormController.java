@@ -47,13 +47,7 @@ public class FormController {
     @RequestMapping(value = "/getSlots", method = RequestMethod.GET)
     @ResponseBody
     private ArrayList<String> getTimeSlots(@RequestParam("date") String date) {
-        ArrayList<String> s;
-//        s.add("8.00 AM- 8.30 AM");
-//        s.add("8.30 AM- 9:00 AM");
-
-        s = dateTimeSlotService.getTimeSlotsFor(date);
-
-        return s;
+        return dateTimeSlotService.getTimeSlotsFor(date);
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
