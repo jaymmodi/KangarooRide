@@ -3,6 +3,8 @@ package com.ride.controllers;
 import com.ride.DAO.UserDAO;
 import com.ride.Model.FormDetails;
 import com.ride.Model.Rides;
+import com.ride.services.ConfirmationCodeService;
+import com.ride.services.EmailSenderService;
 import com.ride.services.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jmmodi on 11/9/2015.
@@ -23,6 +26,12 @@ public class FormController {
 
     @Autowired
     ValidationService validationService;
+
+    @Autowired
+    EmailSenderService emailSenderService;
+
+    @Autowired
+    ConfirmationCodeService confirmationCodeService;
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public String goToHelloPage(Model model) {
@@ -45,14 +54,14 @@ public class FormController {
     public String postForm(@ModelAttribute FormDetails formDetails, Model model) {
         model.addAttribute("formDetails", formDetails);
 
-        if(validationService.isValid(formDetails)){
+        List<String> errorMessageList = validationService.getErrorMessage(formDetails);
+
+        if (errorMessageList.size() == 0) {
             //save to db
-            //return a confirmation code
-            // also send an email to user
-        }
-        else{
-            // validation message
-            String message = validationService.getErrorMessage();
+            String code = confirmationCodeService.createUniqueCode(formDetails);
+            emailSenderService.sendEmail(formDetails.getEmailAddress(), code);
+        } else {
+
         }
 
         return "result";
