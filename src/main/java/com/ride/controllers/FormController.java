@@ -58,12 +58,12 @@ public class FormController {
 
         if (errorMessageList.size() == 0) {
             //save to db
-            String code = confirmationCodeService.createUniqueCode(formDetails);
+            String code = confirmationCodeService.createUUIDString(formDetails);
             emailSenderService.sendEmail(formDetails.getEmailAddress(), code);
+            model.addAttribute("code", code);
         } else {
 
         }
-
         return "result";
     }
 

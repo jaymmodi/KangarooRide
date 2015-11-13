@@ -25,13 +25,13 @@ public class ValidationService {
         addIgnoreNull(errorMessageList, isNull(formDetails.getRideName()));
         addIgnoreNull(errorMessageList, isNull(formDetails.getDate()));
         addIgnoreNull(errorMessageList, isNull(formDetails.getTime()));
-//        addIgnoreNull(errorMessageList, isPerfectEmail(formDetails.getEmailAddress()));
+        addIgnoreNull(errorMessageList, isPerfectEmail(formDetails.getEmailAddress()));
 
         return errorMessageList;
     }
 
     private String isPerfectEmail(String emailAddress) {
-        String pattern = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$";
+        String pattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 
         boolean matches = Pattern.compile(pattern).matcher(emailAddress).matches();
 
