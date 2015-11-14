@@ -56,7 +56,8 @@ public class FormController {
             userService.storeUser(formDetails);
             String code = confirmationCodeService.createUUIDString(formDetails);
             emailSenderService.sendEmail(formDetails.getEmailAddress(), code);
-            dateTimeSlotService.update(formDetails.getDate());
+            int slotNumber = dateTimeSlotService.getSlotNumber(formDetails.getTime());
+            dateTimeSlotService.update(slotNumber);
             model.addAttribute("code", code);
         } else {
 

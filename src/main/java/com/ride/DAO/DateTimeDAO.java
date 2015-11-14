@@ -10,11 +10,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Date;
+import java.util.List;
 
 /**
  * Created by jmmodi on 11/13/2015.
@@ -98,12 +99,11 @@ public class DateTimeDAO {
 
     }
 
-    public void update(Date utilDate) {
-        String updateSql = "UPDATE datetimeslot SET available = ? WHERE ridedate = ?";
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        Object[] params = {false, sqlDate};
+    public void update(int slotNumber) {
+        String updateSql = "UPDATE datetimeslot SET available = ? WHERE id = ?";
+        Object[] params = {false, slotNumber};
 
-        int[] types = {Types.BOOLEAN, Types.DATE};
+        int[] types = {Types.BOOLEAN, Types.INTEGER};
 
         jdbcTemplateObject.update(updateSql, params, types);
     }

@@ -6,10 +6,8 @@ import com.ride.Model.TimeSlot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,6 +19,8 @@ public class DateTimeSlotService {
 
     @Autowired
     DateTimeDAO dateTimeDAO;
+
+    HashMap<String, Integer> slotMap = new HashMap<>();
 
     public ArrayList<String> getTimeSlotsFor(String date) {
 
@@ -83,10 +83,13 @@ public class DateTimeSlotService {
     private ArrayList<String> convertToListString(List<TimeSlot> timeSlotList, StartEndSlot startEndSlot) {
         List<String> slots = new ArrayList<>();
         String slotInString;
+        int slotNumber = 1;
 
         for (TimeSlot timeSlot : timeSlotList) {
             slotInString = makeTimeSlots(timeSlot, startEndSlot);
             slots.add(slotInString);
+            slotMap.put(slotInString, slotNumber);
+            ++slotNumber;
         }
         return (ArrayList<String>) slots;
     }
@@ -149,12 +152,12 @@ public class DateTimeSlotService {
         return meridian;
     }
 
-    public void update(String date) {
-        try {
-            Date utilDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
-            dateTimeDAO.update(utilDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void update(int slotNumber) {
+            dateTimeDAO.update(slotNumber);
     }
+
+    public int getSlotNumber(String slot) {
+        return slotMap.get(slot);
+    }
+
 }
