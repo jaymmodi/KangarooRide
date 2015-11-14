@@ -97,6 +97,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
         properties.setProperty("mail.transport.prtotocol", "smtp");
         properties.setProperty("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.setProperty("mail.debug", "true");
 
         return properties;
     }
