@@ -5,14 +5,15 @@ import com.ride.DAO.Mappers.TimeSlotMapper;
 import com.ride.Model.StartEndSlot;
 import com.ride.Model.TimeSlot;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by jmmodi on 11/13/2015.
@@ -63,5 +64,42 @@ public class DateTimeDAO {
         List<StartEndSlot> timeSlots = jdbcTemplateObject.query(sql, new StartEndSlotMapper());
 
         return timeSlots.get(0);
+    }
+
+    public void batchInsert(int slots, String date) {
+
+        int slot[] = new int[slots];
+        java.util.Date utilDate = null;
+
+        try {
+            utilDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < slot.length; i++) {
+            slot[i] = i + 1;
+        }
+
+        String sql = "INSERT INTO datetimeslot\n" +
+                "(id,ridedate,available)\n" +
+                "VALUES\n" +
+                "(?,?,?)";
+
+        final java.util.Date finalUtilDate = utilDate;
+        jdbcTemplateObject.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+                int slotID = slot[i];
+                preparedStatement.setInt(1, slotID);
+                preparedStatement.setDate(2, new java.sql.Date(finalUtilDate.getTime()));
+                preparedStatement.setBoolean(3, true);
+            }
+
+            @Override
+            public int getBatchSize() {
+                return slot.length;
+            }
+        });
+
     }
 }

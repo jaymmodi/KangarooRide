@@ -28,16 +28,18 @@ public class DateTimeSlotService {
             List<TimeSlot> timeSlotList = dateTimeDAO.getSlotsFor(date);
             return convertToListString(timeSlotList, startEndSlot);
         } else {
+            batchInsert(startEndSlot,date);
             return allSlots(startEndSlot);
         }
     }
 
-    private ArrayList<String> allSlots(StartEndSlot startEndSlot) {
-        int hourDiff = hourDiff(startEndSlot.getEndHour(), startEndSlot.getStartHour(), startEndSlot.getStartMeridian(), startEndSlot.getEndMeridian());
-        int minDiff = minDiff(startEndSlot.getEndMin(), startEndSlot.getStartMin());
+    private void batchInsert(StartEndSlot startEndSlot, String date) {
+        int slots = getTotalNumberOfSlots(startEndSlot);
+        dateTimeDAO.batchInsert(slots,date);
+    }
 
-        int totalMins = hourDiff * 60 + minDiff;
-        int totalNumberOfSlots = totalMins / startEndSlot.getDuration();
+    private ArrayList<String> allSlots(StartEndSlot startEndSlot) {
+        int totalNumberOfSlots = getTotalNumberOfSlots(startEndSlot);
         List<TimeSlot> timeSlots = new ArrayList<>();
 
         for (int i = 1; i <= totalNumberOfSlots; i++) {
@@ -47,6 +49,14 @@ public class DateTimeSlotService {
         }
         return convertToListString(timeSlots, startEndSlot);
 
+    }
+
+    private int getTotalNumberOfSlots(StartEndSlot startEndSlot) {
+        int hourDiff = hourDiff(startEndSlot.getEndHour(), startEndSlot.getStartHour(), startEndSlot.getStartMeridian(), startEndSlot.getEndMeridian());
+        int minDiff = minDiff(startEndSlot.getEndMin(), startEndSlot.getStartMin());
+
+        int totalMins = hourDiff * 60 + minDiff;
+        return totalMins / startEndSlot.getDuration();
     }
 
     private int minDiff(int endMin, int startMin) {
