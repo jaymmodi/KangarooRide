@@ -18,13 +18,13 @@ public class ValidationService {
     public List<String> getErrorMessage(FormDetails formDetails) {
         List<String> errorMessageList = new ArrayList<String>();
 
-        addIgnoreNull(errorMessageList, isNull(formDetails.getFirstName()));
-        addIgnoreNull(errorMessageList, isNull(formDetails.getLastName()));
-        addIgnoreNull(errorMessageList, isNull(formDetails.getEmailAddress()));
-        addIgnoreNull(errorMessageList, isNull(formDetails.getPhoneNumber()));
-        addIgnoreNull(errorMessageList, isNull(formDetails.getRideName()));
-        addIgnoreNull(errorMessageList, isNull(formDetails.getDate()));
-        addIgnoreNull(errorMessageList, isNull(formDetails.getTime()));
+        addIgnoreNull(errorMessageList, isNull(formDetails.getFirstName(), "First Name"));
+        addIgnoreNull(errorMessageList, isNull(formDetails.getLastName(), "LastName"));
+        addIgnoreNull(errorMessageList, isNull(formDetails.getEmailAddress(), "Email Address"));
+        addIgnoreNull(errorMessageList, isNull(formDetails.getPhoneNumber(), "Phone Number"));
+        addIgnoreNull(errorMessageList, isNull(formDetails.getRideName(), "Ride Name"));
+        addIgnoreNull(errorMessageList, isNull(formDetails.getDate(), "Ride Date"));
+        addIgnoreNull(errorMessageList, isNull(formDetails.getTime(), "Ride Time"));
         addIgnoreNull(errorMessageList, isPerfectEmail(formDetails.getEmailAddress()));
 
         return errorMessageList;
@@ -39,7 +39,7 @@ public class ValidationService {
     }
 
 
-    private String isNull(String field) {
-        return (field == null) ? field + " is a required field" : null;
+    private String isNull(String field, String fieldName) {
+        return (field == null || field.length() == 0) ? fieldName + " is a required field" : null;
     }
 }
