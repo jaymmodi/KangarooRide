@@ -8,9 +8,10 @@ import java.util.Date;
 public class Registration {
 
     int registration_id;
-    int user_id;
+    String user_id;
     int ride_id;
-    Date ride_dateTime;
+    Date ride_date;
+    String ride_time;
     String comments;
 
 
@@ -31,11 +32,11 @@ public class Registration {
         this.registration_id = registration_id;
     }
 
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
@@ -47,11 +48,19 @@ public class Registration {
         this.ride_id = ride_id;
     }
 
-    public Date getRide_dateTime() {
-        return ride_dateTime;
+    public Date getRide_date() {
+        return ride_date;
     }
 
-    public void setRide_dateTime(Date ride_dateTime) {
-        this.ride_dateTime = ride_dateTime;
+    public void setRide_date(Date ride_date) {
+        this.ride_date = ride_date;
+    }
+
+    public String getRide_time() {
+        return ride_time;
+    }
+
+    public void setRide_time(String ride_time) {
+        this.ride_time = ride_time;
     }
 }
