@@ -14,6 +14,7 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 /**
  * Created by jmmodi on 11/13/2015.
@@ -45,15 +46,9 @@ public class DateTimeDAO {
         dateStringToNewFormat = dateStringToNewFormat.replace("/", "-");
         int rows = 0;
 
-        String sql = "select count(*) from datetimeslot where ridedate =" + " \' " + dateStringToNewFormat + "\'";
-        try {
-            Statement st = jdbcTemplateObject.getDataSource().getConnection().createStatement();
-            ResultSet resultSet = st.executeQuery(sql);
-            resultSet.next();
-            rows = resultSet.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String sql = "select count(*) from datetimeslot where ridedate = ?";
+        Object[] inputs = new Object[]{dateStringToNewFormat};
+        rows = jdbcTemplateObject.queryForObject(sql, inputs, Integer.class);
 
         return rows;
     }
@@ -101,5 +96,15 @@ public class DateTimeDAO {
             }
         });
 
+    }
+
+    public void update(Date utilDate) {
+        String updateSql = "UPDATE datetimeslot SET available = ? WHERE ridedate = ?";
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        Object[] params = {false, sqlDate};
+
+        int[] types = {Types.BOOLEAN, Types.DATE};
+
+        jdbcTemplateObject.update(updateSql, params, types);
     }
 }
