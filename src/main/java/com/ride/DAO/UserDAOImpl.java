@@ -23,15 +23,17 @@ public class UserDAOImpl implements UserDAO {
     }
 
 
-    public void create(User user) {
-        String SQL = "insert into User (firstname, lastname,email,phone_number,address) values (?,?,?,?,?)";
+    public void insert(User user) {
+        String SQL = "insert into User (user_id,firstname, lastname,email,phone_number) values (?,?,?,?,?)";
 
-        jdbcTemplateObject.update(SQL, user.getFirstName(), user.getLastName(), user.getEmailAddress(), user.getPhoneNumber(), user.getAddress());
-        System.out.println("Created Record Name = " + user.getFirstName() + user.getLastName());
+        jdbcTemplateObject.update(SQL, user.getEmailAddress(),user.getFirstName(), user.getLastName(), user.getEmailAddress(), user.getPhoneNumber());
     }
 
-    public User getUser(Integer id) {
-        return null;
+    public int getUser(String email) {
+        String sql = "select count(*) from USER where user_id = ?";
+        Object[] inputs = new Object[]{email};
+        Integer rows = jdbcTemplateObject.queryForObject(sql, inputs, Integer.class);
+        return rows;
     }
 
     public List<User> listStudents() {

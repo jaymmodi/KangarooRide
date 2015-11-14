@@ -1,7 +1,6 @@
 package com.ride.DAO;
 
 import com.ride.Model.User;
-import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -14,9 +13,9 @@ public interface UserDAO {
 
     void setDataSource(DataSource ds);
 
-    void create(User user);
+    void insert(User user);
 
-    User getUser(Integer id);
+    int getUser(String email);
 
     List<User> listStudents();
 
