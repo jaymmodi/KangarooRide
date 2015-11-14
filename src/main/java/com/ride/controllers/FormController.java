@@ -1,12 +1,8 @@
 package com.ride.controllers;
 
-import com.ride.DAO.UserDAO;
 import com.ride.Model.FormDetails;
 import com.ride.Model.Rides;
-import com.ride.services.ConfirmationCodeService;
-import com.ride.services.DateTimeSlotService;
-import com.ride.services.EmailSenderService;
-import com.ride.services.ValidationService;
+import com.ride.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +19,6 @@ import java.util.List;
 public class FormController {
 
     @Autowired
-    UserDAO userDAO;
-
-    @Autowired
     ValidationService validationService;
 
     @Autowired
@@ -36,6 +29,9 @@ public class FormController {
 
     @Autowired
     DateTimeSlotService dateTimeSlotService;
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public String goToHelloPage(Model model) {
@@ -57,9 +53,10 @@ public class FormController {
         List<String> errorMessageList = validationService.getErrorMessage(formDetails);
 
         if (errorMessageList.size() == 0) {
-            //save to db
+            userService.storeUser(formDetails);
             String code = confirmationCodeService.createUUIDString(formDetails);
             emailSenderService.sendEmail(formDetails.getEmailAddress(), code);
+            dateTimeSlotService.update(formDetails.getDate());
             model.addAttribute("code", code);
         } else {
 
