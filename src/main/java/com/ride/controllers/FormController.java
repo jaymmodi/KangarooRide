@@ -54,15 +54,21 @@ public class FormController {
 
         if (errorMessageList.size() == 0) {
             userService.storeUser(formDetails);
+
             String code = confirmationCodeService.createUUIDString(formDetails);
+            model.addAttribute("code", code);
+
             emailSenderService.sendEmail(formDetails.getEmailAddress(), code);
+
             int slotNumber = dateTimeSlotService.getSlotNumber(formDetails.getTime());
             dateTimeSlotService.update(slotNumber);
-            model.addAttribute("code", code);
+            return "result";
         } else {
-
+            model.addAttribute("errorMessageList", errorMessageList);
+            model.addAttribute("formDetails", new FormDetails());
+            model.addAttribute("rides", getAllRides());
+            return "form";
         }
-        return "result";
     }
 
     public String[] getAllRides() {
