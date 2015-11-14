@@ -6,7 +6,10 @@ import com.ride.Model.TimeSlot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,14 +31,14 @@ public class DateTimeSlotService {
             List<TimeSlot> timeSlotList = dateTimeDAO.getSlotsFor(date);
             return convertToListString(timeSlotList, startEndSlot);
         } else {
-            batchInsert(startEndSlot,date);
+            batchInsert(startEndSlot, date);
             return allSlots(startEndSlot);
         }
     }
 
     private void batchInsert(StartEndSlot startEndSlot, String date) {
         int slots = getTotalNumberOfSlots(startEndSlot);
-        dateTimeDAO.batchInsert(slots,date);
+        dateTimeDAO.batchInsert(slots, date);
     }
 
     private ArrayList<String> allSlots(StartEndSlot startEndSlot) {
@@ -114,11 +117,12 @@ public class DateTimeSlotService {
             endMin = 0;
         }
 
-        startHour = day12HourClock(startHour);
-        startMeridian = getMeridian(startHour, startMeridian);
 
+        startMeridian = getMeridian(startHour, startMin, startMeridian);
+        startHour = day12HourClock(startHour);
+
+        endMeridian = getMeridian(endHour, endMin, endMeridian);
         endHour = day12HourClock(endHour);
-        endMeridian = getMeridian(endHour, endMeridian);
 
         setToTimeSlot(timeSlot, startHour, startMin);
 
@@ -138,12 +142,19 @@ public class DateTimeSlotService {
     }
 
 
-    public String getMeridian(int hour, String meridian) {
-        if (hour >= 12) {
+    public String getMeridian(int hour, int min, String meridian) {
+        if (hour * 60 + min >= 720) {
             meridian = "PM";
-        } else {
-            meridian = "AM";
         }
         return meridian;
+    }
+
+    public void update(String date) {
+        try {
+            Date utilDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+            dateTimeDAO.update(utilDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
