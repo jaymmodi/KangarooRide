@@ -55,7 +55,7 @@ public class FormController {
         if (errorMessageList.size() == 0) {
             userService.storeUser(formDetails);
 
-            String code = confirmationCodeService.createUUIDString(formDetails);
+            String code = confirmationCodeService.createUniqueCode(formDetails);
             model.addAttribute("code", code);
 
             emailSenderService.sendEmail(formDetails.getEmailAddress(), code);
