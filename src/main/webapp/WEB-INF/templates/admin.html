@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width,initial-scale=1.0" charset="UTF-8"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen"/>
+    <link rel="stylesheet" href="../../resources/css/theme.default.css" th:href="@{/resources/css/theme.default.css}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="result_row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="tablesorter" id="adminTable">
+                    <thead>
+                    <th>User Email</th>
+                    <th>ride_name</th>
+                    <th>ride_date</th>
+                    <th>ride_time</th>
+                    <th>comments</th>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="item : ${registration}">
+                        <tr>
+                            <td th:text="${item.user_id}">A Smoke Test'</td>
+                            <td th:text="${item.ride_id}">A Smoke Test'</td>
+                            <td th:text="${item.ride_date}">A Smoke Test'</td>
+                            <td th:text="${item.ride_time}">A Smoke Test'</td>
+                            <td th:text="${item.comments}">A Smoke Test'</td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="../../resources/js/jquery.tablesorter.js" th:src="@{/resources/js/jquery.tablesorter.js}"></script>
+<script type="text/javascript">
+    $(function(){
+        $("#adminTable").tablesorter();
+    });
+</script>
+</html>
