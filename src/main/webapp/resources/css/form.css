@@ -6,6 +6,6 @@
     padding-left: 0px;
 }
 
-/*.well {*/
-    /*background: rgb(22, 105, 173);*/
-/*}*/
+.result_row {
+    padding-top: 250px;
+}

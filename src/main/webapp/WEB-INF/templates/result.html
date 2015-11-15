@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width,initial-scale=1.0" charset="UTF-8"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen"/>
+    <link rel="stylesheet" href="../../resources/css/form.css" th:href="@{/resources/css/form.css}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="result_row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6 well">
+            <p th:text="'Hi,' + ${formDetails.firstName}">Hi, Shrijit</p>
+            <p th:text="'Your confirmation code for the ride is' + ${code}"> Your confirmation code for the ride is ABCD</p>
+            <a href="/form">Submit another message</a>
+        </div>
+        <div class="col-xs-3"></div>
+    </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</html>
