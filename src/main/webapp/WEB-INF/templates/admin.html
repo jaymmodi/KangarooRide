@@ -29,11 +29,47 @@
                             <td class="ride_date" th:text="${item.ride_date}">A Smoke Test'</td>
                             <td class="ride_time" th:text="${item.ride_time}">A Smoke Test'</td>
                             <td class="ride_comments" th:text="${item.comments}">A Smoke Test'</td>
-                            <td><button type="button" class="btn btn-primary edit_button">Edit</button> <button type="button" class="btn btn-primary delete_button">Delete</button></td>
+                            <td><button type="button" class="btn btn-primary edit_button" data-toggle="modal" data-target="#myModal">Edit</button> <button type="button" class="btn btn-primary delete_button">Delete</button></td>
                         </tr>
                     </th:block>
                     </tbody>
                 </table>
+            </div>
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Date and Time</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Some text in the modal.</p>
+
+                            <div class="date form-group">
+                                <label for="datepicker" class="control-label col-xs-4">Pick a Date*</label>
+
+                                <div class="col-xs-8">
+                                    <input type="text" placeholder="click to show datepicker" id="datepicker"
+                                           onchange="sendDate()" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="time form-group">
+                                <label for="timeSlots" class="control-label col-xs-4">Pick a Time*</label>
+
+                                <div class="col-xs-8">
+                                    <select id="timeSlots" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -49,4 +85,13 @@
     });
 </script>
 <script src="../../resources/js/editDelete.js" th:src="@{/resources/js/editDelete.js}"></script>
+<script src="../../resources/js/datepicker.js" th:src="@{/resources/js/datepicker.js}"></script>
+<script src="../../resources/js/sendDateToServer.js" th:src="@{/resources/js/sendDateToServer.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datepicker').datepicker({
+            format: "yyyy/mm/dd"
+        });
+    });
+</script>
 </html>
