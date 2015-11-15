@@ -17,7 +17,7 @@
                     <th>User Email</th>
                     <th>ride_name</th>
                     <th>ride_date</th>
-                    <th>ride_time</th>
+                    <th data-sorter="shortDate" data-date-format="yyyy/MM/dd">ride_time</th>
                     <th>comments</th>
                     </thead>
                     <tbody>
@@ -42,7 +42,7 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="../../resources/js/jquery.tablesorter.js" th:src="@{/resources/js/jquery.tablesorter.js}"></script>
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         $("#adminTable").tablesorter();
     });
 </script>
