@@ -19,15 +19,17 @@
                     <th>ride_date</th>
                     <th data-sorter="shortDate" data-date-format="yyyy/MM/dd">ride_time</th>
                     <th>comments</th>
+                    <th>update</th>
                     </thead>
                     <tbody>
                     <th:block th:each="item : ${registration}">
                         <tr>
-                            <td th:text="${item.user_id}">A Smoke Test'</td>
-                            <td th:text="${item.ride.rideName}">A Smoke Test'</td>
-                            <td th:text="${item.ride_date}">A Smoke Test'</td>
-                            <td th:text="${item.ride_time}">A Smoke Test'</td>
-                            <td th:text="${item.comments}">A Smoke Test'</td>
+                            <td class="user_id" th:text="${item.user_id}">A Smoke Test'</td>
+                            <td class="ride_name" th:text="${item.ride.rideName}">A Smoke Test'</td>
+                            <td class="ride_date" th:text="${item.ride_date}">A Smoke Test'</td>
+                            <td class="ride_time" th:text="${item.ride_time}">A Smoke Test'</td>
+                            <td class="ride_comments" th:text="${item.comments}">A Smoke Test'</td>
+                            <td><button type="button" class="btn btn-primary edit_button">Edit</button> <button type="button" class="btn btn-primary delete_button">Delete</button></td>
                         </tr>
                     </th:block>
                     </tbody>
@@ -46,4 +48,5 @@
         $("#adminTable").tablesorter();
     });
 </script>
+<script src="../../resources/js/editDelete.js" th:src="@{/resources/js/editDelete.js}"></script>
 </html>

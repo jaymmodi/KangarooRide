@@ -7,7 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Date;
+import java.sql.Types;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,5 +43,17 @@ public class RegistrationDAO {
         return registrations;
 
 
+    }
+
+    public void deleteRegistration(String user_id, Date utilDate, String ride_time) {
+        String updateSql = "DELETE from registration WHERE user_id = ? and ride_date =? and ride_time=?";
+
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        Object[] params = {user_id, sqlDate, ride_time};
+
+        int[] types = {Types.VARCHAR, Types.DATE, Types.VARCHAR};
+
+        jdbcTemplateObject.update(updateSql, params, types);
     }
 }

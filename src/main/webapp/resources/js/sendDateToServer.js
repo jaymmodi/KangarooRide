@@ -4,7 +4,7 @@ function sendDate() {
         method: "GET",
         url: '/getSlots',
         data: {
-            date: date,
+            date: date
         },
         success : function(data){
             $('#timeSlots').empty();

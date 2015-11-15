@@ -87,4 +87,10 @@ public class FormController {
     public String[] getAllRides() {
         return Rides.names();
     }
+
+    @RequestMapping(value = "/deleteRegistration", method = RequestMethod.POST)
+    public void deleteRegistration(@RequestParam("user_id") String user_id, @RequestParam("ride_date") String ride_date, @RequestParam("ride_time") String ride_time) {
+        registrationService.delete(user_id, ride_date, ride_time);
+    }
+
 }
