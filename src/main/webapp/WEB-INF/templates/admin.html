@@ -24,7 +24,7 @@
                     <th:block th:each="item : ${registration}">
                         <tr>
                             <td th:text="${item.user_id}">A Smoke Test'</td>
-                            <td th:text="${item.ride_id}">A Smoke Test'</td>
+                            <td th:text="${item.ride.rideName}">A Smoke Test'</td>
                             <td th:text="${item.ride_date}">A Smoke Test'</td>
                             <td th:text="${item.ride_time}">A Smoke Test'</td>
                             <td th:text="${item.comments}">A Smoke Test'</td>
