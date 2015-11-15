@@ -13,6 +13,15 @@ public class Registration {
     Date ride_date;
     String ride_time;
     String comments;
+    Ride ride;
+
+    public Ride getRide() {
+        return ride;
+    }
+
+    public void setRide(Ride ride) {
+        this.ride = ride;
+    }
 
 
     public String getComments() {
