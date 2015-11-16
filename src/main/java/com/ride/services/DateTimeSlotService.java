@@ -152,12 +152,36 @@ public class DateTimeSlotService {
         return meridian;
     }
 
-    public void update(int slotNumber) {
-            dateTimeDAO.update(slotNumber);
+    public void update(int slotNumber, boolean available) {
+        dateTimeDAO.update(slotNumber, available);
     }
 
     public int getSlotNumber(String slot) {
-        return slotMap.get(slot);
-    }
+        StartEndSlot startEndSlot = dateTimeDAO.getStartSlot();
 
+        String timings[] = slot.split("-");
+        String slotStart = timings[0];
+        String slotmeridian;
+
+        if (slotStart.contains("AM")) {
+            slotmeridian = "AM";
+            slotStart = slotStart.replace("AM", "");
+        } else {
+            slotmeridian = "PM";
+            slotStart = slotStart.replace("PM", "");
+        }
+
+        String hourMinsStart[] = slotStart.split("\\.");
+
+        int hourStart = Integer.parseInt(hourMinsStart[0]);
+        int minStart = Integer.parseInt(hourMinsStart[1]);
+
+
+        int hourDiff = hourDiff(hourStart, startEndSlot.getStartHour(), startEndSlot.getStartMeridian(), slotmeridian);
+        int minDiff = minDiff(minStart, startEndSlot.getStartMin());
+
+        int totalMin = hourDiff * 60 + minDiff;
+
+        return (totalMin / startEndSlot.getDuration()) + 1;
+    }
 }

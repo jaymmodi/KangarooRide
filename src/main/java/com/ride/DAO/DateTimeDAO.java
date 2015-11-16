@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,11 +68,8 @@ public class DateTimeDAO {
         int slot[] = new int[slots];
         java.util.Date utilDate = null;
 
-        try {
-            utilDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        utilDate = getDate(date, utilDate);
+
         for (int i = 0; i < slot.length; i++) {
             slot[i] = i + 1;
         }
@@ -99,9 +97,18 @@ public class DateTimeDAO {
 
     }
 
-    public void update(int slotNumber) {
+    private Date getDate(String date, Date utilDate) {
+        try {
+            utilDate = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return utilDate;
+    }
+
+    public void update(int slotNumber, boolean available) {
         String updateSql = "UPDATE datetimeslot SET available = ? WHERE id = ?";
-        Object[] params = {false, slotNumber};
+        Object[] params = {available, slotNumber};
 
         int[] types = {Types.BOOLEAN, Types.INTEGER};
 

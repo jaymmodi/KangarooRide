@@ -12,8 +12,6 @@ public enum Rides {
     public String rideName;
 
     Rides(String s) {
-
-
         rideName = s;
     }
 

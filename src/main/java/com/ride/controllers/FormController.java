@@ -69,7 +69,7 @@ public class FormController {
             userService.storeUser(formDetails);
 
             int slotNumber = dateTimeSlotService.getSlotNumber(formDetails.getTime());
-            dateTimeSlotService.update(slotNumber);
+            dateTimeSlotService.update(slotNumber, false);
 
             String code = confirmationCodeService.createUniqueCode(formDetails);
             model.addAttribute("code", code);
@@ -91,6 +91,8 @@ public class FormController {
     @RequestMapping(value = "/deleteRegistration", method = RequestMethod.POST)
     public void deleteRegistration(@RequestParam("user_id") String user_id, @RequestParam("ride_date") String ride_date, @RequestParam("ride_time") String ride_time) {
         registrationService.delete(user_id, ride_date, ride_time);
+        int slotNumber = dateTimeSlotService.getSlotNumber(ride_time);
+        dateTimeSlotService.update(slotNumber,true);
     }
 
 }
