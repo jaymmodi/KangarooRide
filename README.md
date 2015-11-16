@@ -48,3 +48,8 @@ create table configuration(
     meridian_end varchar(6)
 );
 
+create table datetimeslot(
+    id int(6),
+    ridedate date,
+    available boolean
+);
